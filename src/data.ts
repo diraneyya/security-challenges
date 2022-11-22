@@ -4,6 +4,7 @@ interface ChallengeEntry {
   solution: string;
   level: number;
   notice: string;
+  hidden?: boolean;
 }
 
 type CallengeEntryWithId = ChallengeEntry | { id: string };
@@ -16,6 +17,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
     level: 1,
     notice:
       "Crack the password to capture the flag. If you encounter a problem to display the page, I remind you that you must create an account on root-me.org to access certain challenges",
+    hidden: true,
   },
   {
     name: "[Web Client] HTML - buttons disabled",
@@ -44,6 +46,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
     solution: "administrator",
     level: 1,
     notice: "Crack the password to capture the flag",
+    hidden: true,
   },
   {
     name: "[Web Client] Rand Game",
@@ -51,6 +54,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
     solution: "H7tp_h4s_N0_s3Cr37S_F0r_y0U",
     level: 1,
     notice: "Cheat to win and recover the password",
+    hidden: true,
   },
   {
     name: "[Web Client] Hack the bank",
@@ -103,6 +107,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
     solution: "LINUX",
     level: 3,
     notice: "Search in the bowels of the server",
+    hidden: true,
   },
   {
     name: "[Web Server] Injection",
@@ -110,6 +115,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
     solution: "TYsgv75zgtq",
     level: 4,
     notice: "Recover password for user1",
+    hidden: true,
   },
   {
     name: "[Web server] HTTP - Open redirect",
@@ -118,6 +124,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
     level: 4,
     notice:
       "Find a way to redirect to a domain other than those offered on the web page and then take a look at the network to capture the flag",
+    hidden: true,
   },
   {
     name: "[XSS] Chat scripting",
@@ -129,11 +136,11 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
   },
 ];
 
-export const CHALLENGES : CallengeEntryWithId[] = CHALLENGES_RAW.map(
-  (challenge) => {
-    const challengeWithId : CallengeEntryWithId = challenge;
-    challengeWithId.id = challenge.name.replaceAll(" ", "");
+export const CHALLENGES: CallengeEntryWithId[] = CHALLENGES_RAW.filter(
+  (challenge) => !challenge?.hidden
+).map((challenge) => {
+  const challengeWithId: CallengeEntryWithId = challenge;
+  challengeWithId.id = challenge.name.replaceAll(" ", "");
 
-    return challengeWithId;
-  }
-);
+  return challengeWithId;
+});
