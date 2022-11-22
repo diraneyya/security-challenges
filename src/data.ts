@@ -81,7 +81,7 @@ const CHALLENGES_RAW: ChallengeEntry[] = [
   {
     name: "[XSS] Hack Search",
     url: "https://xss-game.appspot.com/level1",
-    solution: "Persistence is the key",
+    solution: "Persistence is key",
     level: 2,
     notice:
       "Injects an alert(). Once successful, enter the exact xss-game level 2 title to capture the flag",
